@@ -44,10 +44,6 @@ docker compose up --build
 - PostgreSQL должна быть запущена отдельно (локально, на сервере или в другом compose).
 - В `.env` укажи параметры внешней БД (`PG_HOST`, `PG_PORT`, `PG_DB`, `PG_USER`, `PG_PASSWORD`).
 - Если PostgreSQL работает на хост-машине и backend запущен в Docker, для Windows/macOS обычно нужен `PG_HOST=host.docker.internal`.
-- Для кросс-доменных сессий (frontend и backend на разных доменах, например Railway):
-  - `FRONTEND_BASE_URL=https://<frontend-domain>`
-  - `SESSION_COOKIE_SAMESITE=none`
-  - `SESSION_COOKIE_SECURE=true`
 
 Вход ROOT берётся из `.env`:
 - `ROOT_USERNAME`
@@ -62,6 +58,12 @@ docker compose up --build
 - Для новых пользователей генерируется временный пароль (видно на странице пользователeй).
 - При первом входе (или после сброса) — принудительная смена пароля.
 - Для root смена не требуется по умолчанию.
+
+## AzeriCard (MPI / 3-D Secure)
+
+- Официальная документация: [developer.azericard.com](https://developer.azericard.com/) (прод; часто нужна авторизация в браузере).
+- Тестовая / песочница: [developer-test.azericard.com](https://developer-test.azericard.com/).
+- Шлюз MPI (из руководств AzeriCard): **test** — `https://testmpi.3dsecure.az/cgi-bin/cgi_link`, **prod** — `https://mpi.3dsecure.az/cgi-bin/cgi_link`. В `.env` поля `AZERICARD_GATEWAY_URL` и `AZERICARD_API_URL` должны совпадать с режимом терминала.
 
 ## AzeriCard Apple Pay / Google Pay
 - Для отдельного wallet-терминала заполните в `.env`:

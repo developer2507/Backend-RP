@@ -18,15 +18,12 @@ def verify_password(password: str, password_hash: str) -> bool:
 
 def set_session(response: Response, user_id: int):
     token = serializer.dumps({"user_id": user_id})
-    samesite = (settings.SESSION_COOKIE_SAMESITE or "lax").strip().lower()
-    if samesite not in {"lax", "strict", "none"}:
-        samesite = "lax"
     response.set_cookie(
         key=settings.COOKIE_NAME,
         value=token,
         httponly=True,
-        samesite=samesite,
-        secure=settings.SESSION_COOKIE_SECURE,
+        samesite="lax",
+        secure=False,  # включите True за HTTPS
         max_age=60 * 60 * 8,  # 8 часов
         path="/",
     )

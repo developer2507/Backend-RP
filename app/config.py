@@ -1,3 +1,15 @@
+"""
+Application settings. AzeriCard MPI URLs and parameter semantics match the vendor docs:
+
+- Production portal (may require login from browser): https://developer.azericard.com/
+- Test / sandbox documentation (public): https://developer-test.azericard.com/
+
+MPI CGI endpoints (from official integration guides):
+- Test:  https://testmpi.3dsecure.az/cgi-bin/cgi_link
+- Prod: https://mpi.3dsecure.az/cgi-bin/cgi_link
+
+Set AZERICARD_GATEWAY_URL and AZERICARD_API_URL in .env to the pair that matches your terminal environment.
+"""
 import os
 from pathlib import Path
 from pydantic import BaseModel
@@ -19,15 +31,13 @@ class Settings(BaseModel):
     # Секреты/куки
     SESSION_SECRET_KEY: str = os.getenv("SESSION_SECRET_KEY", "")
     COOKIE_NAME: str = os.getenv("COOKIE_NAME", "session_id")
-    SESSION_COOKIE_SAMESITE: str = os.getenv("SESSION_COOKIE_SAMESITE", "lax")
-    SESSION_COOKIE_SECURE: bool = os.getenv("SESSION_COOKIE_SECURE", "false").strip().lower() in {"1", "true", "yes", "on"}
 
     # ROOT-учётка
     ROOT_USERNAME: str = os.getenv("ROOT_USERNAME", "")
     ROOT_PASSWORD: str = os.getenv("ROOT_PASSWORD", "")
     FRONTEND_BASE_URL: str = os.getenv("FRONTEND_BASE_URL", "")
 
-    # AzeriCard — general
+    # AzeriCard — MPI (see module docstring for official docs + test/prod gateway URLs)
     AZERICARD_GATEWAY_URL: str = os.getenv("AZERICARD_GATEWAY_URL", "")
     AZERICARD_API_URL: str = os.getenv("AZERICARD_API_URL", "")
     AZERICARD_MERCH_NAME: str = os.getenv("AZERICARD_MERCH_NAME", "")
