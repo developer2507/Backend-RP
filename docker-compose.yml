@@ -1,42 +1,13 @@
 services:
-  db:
-    image: postgres:16-alpine
-    container_name: royalpark-db
-    restart: unless-stopped
-    environment:
-      POSTGRES_DB: ${PG_DB:-fastApiAyaz}
-      POSTGRES_USER: ${PG_USER:-postgres}
-      POSTGRES_PASSWORD: "${PG_PASSWORD:-admin Ayaz}"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${PG_USER:-postgres} -d ${PG_DB:-fastApiAyaz}"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 10s
-
   backend:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: royalpark-backend
     restart: unless-stopped
-    depends_on:
-      db:
-        condition: service_healthy
     env_file:
       - ./.env
-    environment:
-      PG_HOST: db
-      PG_PORT: 5432
-      PG_DB: ${PG_DB:-fastApiAyaz}
-      PG_USER: ${PG_USER:-postgres}
-      PG_PASSWORD: "${PG_PASSWORD:-admin Ayaz}"
     ports:
       - "8000:8000"
     volumes:
       - ./uploads:/app/uploads
-
-volumes:
-  postgres_data:

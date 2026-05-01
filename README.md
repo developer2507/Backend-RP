@@ -40,8 +40,10 @@ docker compose up --build
 - Healthcheck: http://127.0.0.1:8000/healthz
 
 Важно для Docker:
-- Бэкенд подключается к БД по `PG_HOST=db` (имя сервиса в `docker-compose.yml`).
-- Для локального запуска без Docker можно оставить `PG_HOST=127.0.0.1`.
+- `docker-compose.yml` поднимает только backend-контейнер (без PostgreSQL).
+- PostgreSQL должна быть запущена отдельно (локально, на сервере или в другом compose).
+- В `.env` укажи параметры внешней БД (`PG_HOST`, `PG_PORT`, `PG_DB`, `PG_USER`, `PG_PASSWORD`).
+- Если PostgreSQL работает на хост-машине и backend запущен в Docker, для Windows/macOS обычно нужен `PG_HOST=host.docker.internal`.
 
 Вход ROOT берётся из `.env`:
 - `ROOT_USERNAME`
