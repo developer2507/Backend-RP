@@ -1,15 +1,3 @@
-"""
-Application settings. AzeriCard MPI URLs and parameter semantics match the vendor docs:
-
-- Production portal (may require login from browser): https://developer.azericard.com/
-- Test / sandbox documentation (public): https://developer-test.azericard.com/
-
-MPI CGI endpoints (from official integration guides):
-- Test:  https://testmpi.3dsecure.az/cgi-bin/cgi_link
-- Prod: https://mpi.3dsecure.az/cgi-bin/cgi_link
-
-Set AZERICARD_GATEWAY_URL and AZERICARD_API_URL in .env to the pair that matches your terminal environment.
-"""
 import os
 from pathlib import Path
 from pydantic import BaseModel
@@ -37,7 +25,7 @@ class Settings(BaseModel):
     ROOT_PASSWORD: str = os.getenv("ROOT_PASSWORD", "")
     FRONTEND_BASE_URL: str = os.getenv("FRONTEND_BASE_URL", "")
 
-    # AzeriCard — MPI (see module docstring for official docs + test/prod gateway URLs)
+    # AzeriCard — general
     AZERICARD_GATEWAY_URL: str = os.getenv("AZERICARD_GATEWAY_URL", "")
     AZERICARD_API_URL: str = os.getenv("AZERICARD_API_URL", "")
     AZERICARD_MERCH_NAME: str = os.getenv("AZERICARD_MERCH_NAME", "")

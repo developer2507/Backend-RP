@@ -59,12 +59,6 @@ docker compose up --build
 - При первом входе (или после сброса) — принудительная смена пароля.
 - Для root смена не требуется по умолчанию.
 
-## AzeriCard (MPI / 3-D Secure)
-
-- Официальная документация: [developer.azericard.com](https://developer.azericard.com/) (прод; часто нужна авторизация в браузере).
-- Тестовая / песочница: [developer-test.azericard.com](https://developer-test.azericard.com/).
-- Шлюз MPI (из руководств AzeriCard): **test** — `https://testmpi.3dsecure.az/cgi-bin/cgi_link`, **prod** — `https://mpi.3dsecure.az/cgi-bin/cgi_link`. В `.env` поля `AZERICARD_GATEWAY_URL` и `AZERICARD_API_URL` должны совпадать с режимом терминала.
-
 ## AzeriCard Apple Pay / Google Pay
 - Для отдельного wallet-терминала заполните в `.env`:
   - `AZERICARD_TERMINAL_WALLET`
