@@ -6,7 +6,6 @@ from ..frontend import redirect_frontend, redirect_admin
 router = APIRouter()
 
 
-@router.get("")
 @router.get("/")
 def home(user=Depends(get_current_user)):
     if user.role == RoleEnum.RESIDENT:
