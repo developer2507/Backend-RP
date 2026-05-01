@@ -44,6 +44,10 @@ docker compose up --build
 - PostgreSQL должна быть запущена отдельно (локально, на сервере или в другом compose).
 - В `.env` укажи параметры внешней БД (`PG_HOST`, `PG_PORT`, `PG_DB`, `PG_USER`, `PG_PASSWORD`).
 - Если PostgreSQL работает на хост-машине и backend запущен в Docker, для Windows/macOS обычно нужен `PG_HOST=host.docker.internal`.
+- Для кросс-доменных сессий (frontend и backend на разных доменах, например Railway):
+  - `FRONTEND_BASE_URL=https://<frontend-domain>`
+  - `SESSION_COOKIE_SAMESITE=none`
+  - `SESSION_COOKIE_SECURE=true`
 
 Вход ROOT берётся из `.env`:
 - `ROOT_USERNAME`
