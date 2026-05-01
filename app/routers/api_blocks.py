@@ -33,6 +33,7 @@ class BlockUpdate(BaseModel):
     is_active: Optional[bool] = None
 
 
+@router.get("", response_model=List[BlockOut])
 @router.get("/", response_model=List[BlockOut])
 def list_blocks_api(
     db: Session = Depends(get_db),
@@ -45,6 +46,7 @@ def list_blocks_api(
     return blocks
 
 
+@router.post("", response_model=BlockOut, status_code=status.HTTP_201_CREATED)
 @router.post("/", response_model=BlockOut, status_code=status.HTTP_201_CREATED)
 def create_block_api(
     payload: BlockCreate,

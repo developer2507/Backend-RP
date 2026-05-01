@@ -316,6 +316,7 @@ def _list_payments_internal(
     }
 
 
+@router.get("")
 @router.get("/")
 def list_payments_api(
     resident_id: Optional[str] = Query(None),
@@ -404,6 +405,7 @@ def get_payment_api(
     }
 
 
+@router.post("")
 @router.post("/")
 def create_payment_api(
     payment: PaymentCreate,

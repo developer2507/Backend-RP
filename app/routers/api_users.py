@@ -76,6 +76,7 @@ class UserListOut(BaseModel):
     last_page: int
 
 
+@router.get("", response_model=UserListOut)
 @router.get("/", response_model=UserListOut)
 def list_users_api(
     db: Session = Depends(get_db),
@@ -103,6 +104,7 @@ def list_users_api(
     }
 
 
+@router.post("", response_model=UserOut, status_code=status.HTTP_201_CREATED)
 @router.post("/", response_model=UserOut, status_code=status.HTTP_201_CREATED)
 def create_user_api(
     payload: UserCreate,

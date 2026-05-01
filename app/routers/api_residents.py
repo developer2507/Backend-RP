@@ -532,6 +532,7 @@ def _list_residents_internal(
     }
 
 
+@router.get("")
 @router.get("/")
 def list_residents_api(
     db: Session = Depends(get_db),
@@ -587,6 +588,7 @@ def list_residents_public(
     )
 
 
+@router.post("", response_model=ResidentOut, status_code=status.HTTP_201_CREATED)
 @router.post("/", response_model=ResidentOut, status_code=status.HTTP_201_CREATED)
 def create_resident_api(
     payload: ResidentCreate,

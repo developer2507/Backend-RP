@@ -685,6 +685,7 @@ def delete_meter_photo_for_reading(db: Session, reading_id: int) -> None:
 
 
 # ====== List readings ======
+@router.get("")
 @router.get("/")
 def list_readings(
     db: Session = Depends(get_db),
@@ -1290,6 +1291,7 @@ def create_readings_public(
 
 
 # ====== Create/Update readings ======
+@router.post("")
 @router.post("/")
 def create_readings(
     data: ReadingCreate,

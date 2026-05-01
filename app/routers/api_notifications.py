@@ -238,6 +238,7 @@ def _get_notification_internal(
     return _build_notification_out(notif)
 
 
+@router.get("")
 @router.get("/")
 def list_notifications(
     status: Optional[str] = Query(None, alias="status"),
