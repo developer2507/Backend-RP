@@ -391,10 +391,11 @@ def create_app() -> FastAPI:
     app.add_middleware(
         CORSMiddleware,
         allow_origins=[
-            "http://localhost:3000",
-            "http://127.0.0.1:3000",
-            "http://localhost:8000",
-            "http://127.0.0.1:8000",
+            # "http://localhost:3000",
+            # "http://127.0.0.1:3000",
+            # "http://localhost:8000",
+            # "http://127.0.0.1:8000",
+            "https://frontend-rp-production.up.railway.app",
         ],
         allow_origin_regex=r"https?://(localhost|127\.0\.0\.1)(:\d+)?",
         allow_credentials=True,
