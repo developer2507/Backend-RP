@@ -19,6 +19,8 @@ class Settings(BaseModel):
     # Секреты/куки
     SESSION_SECRET_KEY: str = os.getenv("SESSION_SECRET_KEY", "")
     COOKIE_NAME: str = os.getenv("COOKIE_NAME", "session_id")
+    SESSION_COOKIE_SAMESITE: str = os.getenv("SESSION_COOKIE_SAMESITE", "lax")
+    SESSION_COOKIE_SECURE: bool = os.getenv("SESSION_COOKIE_SECURE", "false").strip().lower() in {"1", "true", "yes", "on"}
 
     # ROOT-учётка
     ROOT_USERNAME: str = os.getenv("ROOT_USERNAME", "")
