@@ -387,7 +387,7 @@ def create_app() -> FastAPI:
     app = FastAPI(title="FastAPI Admin (Dark)")
     app.add_middleware(SessionMiddleware, secret_key=settings.SESSION_SECRET_KEY, session_cookie=settings.COOKIE_NAME)
 
-    frontend_origin = str(settings.FRONTEND_BASE_URL or "").rstrip("/")
+    frontend_origin = str(settings.FRONTEND_BASE_URL or "").strip().rstrip("/")
     allow_origins = [
         "http://localhost:3000",
         "http://127.0.0.1:3000",

@@ -8,29 +8,24 @@ BACKEND_ROOT = Path(__file__).resolve().parents[1]
 load_dotenv(BACKEND_ROOT / ".env")
 
 
-def _get_env(key: str, default: str = "") -> str:
-    value = os.getenv(key, default)
-    return str(value).strip().strip("\"'")
-
-
 class Settings(BaseModel):
     # Подключение к БД
-    PG_HOST: str = _get_env("PG_HOST")
-    PG_PORT: int = int(_get_env("PG_PORT", "5432"))
-    PG_USER: str = _get_env("PG_USER")
-    PG_PASSWORD: str = _get_env("PG_PASSWORD")
-    PG_DB: str = _get_env("PG_DB")
+    PG_HOST: str = os.getenv("PG_HOST", "")
+    PG_PORT: int = int(os.getenv("PG_PORT", "5432"))
+    PG_USER: str = os.getenv("PG_USER", "")
+    PG_PASSWORD: str = os.getenv("PG_PASSWORD", "")
+    PG_DB: str = os.getenv("PG_DB", "")
 
     # Секреты/куки
-    SESSION_SECRET_KEY: str = _get_env("SESSION_SECRET_KEY")
-    COOKIE_NAME: str = _get_env("COOKIE_NAME", "session_id")
-    SESSION_COOKIE_SAMESITE: str = _get_env("SESSION_COOKIE_SAMESITE", "lax")
-    SESSION_COOKIE_SECURE: bool = _get_env("SESSION_COOKIE_SECURE", "false").lower() in {"1", "true", "yes", "on"}
+    SESSION_SECRET_KEY: str = os.getenv("SESSION_SECRET_KEY", "")
+    COOKIE_NAME: str = os.getenv("COOKIE_NAME", "session_id")
+    SESSION_COOKIE_SAMESITE: str = os.getenv("SESSION_COOKIE_SAMESITE", "lax")
+    SESSION_COOKIE_SECURE: bool = os.getenv("SESSION_COOKIE_SECURE", "false").strip().lower() in {"1", "true", "yes", "on"}
 
     # ROOT-учётка
-    ROOT_USERNAME: str = _get_env("ROOT_USERNAME")
-    ROOT_PASSWORD: str = _get_env("ROOT_PASSWORD")
-    FRONTEND_BASE_URL: str = _get_env("FRONTEND_BASE_URL")
+    ROOT_USERNAME: str = os.getenv("ROOT_USERNAME", "")
+    ROOT_PASSWORD: str = os.getenv("ROOT_PASSWORD", "")
+    FRONTEND_BASE_URL: str = os.getenv("FRONTEND_BASE_URL", "")
 
     # AzeriCard — general
     AZERICARD_GATEWAY_URL: str = os.getenv("AZERICARD_GATEWAY_URL", "")
